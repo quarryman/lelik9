@@ -30,4 +30,7 @@ export DAEMONIZE_PUMA=true
 rvm requirements
 rvm install 2.3.3
 
-
+gem install bundler
+bundle install
+bundle exec rake db:migrate
+bundle exec puma
