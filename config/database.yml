@@ -24,7 +24,7 @@ default: &default
 
 development:
   <<: *default
-  database: lug
+  database: lelik9
   username: lelik
 
   # The specified database role being used to connect to postgres.
