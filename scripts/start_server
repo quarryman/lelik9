@@ -25,6 +25,7 @@ export SECRET_KEY_BASE="$(bundle exec rake secret)"
 export DAEMONIZE_PUMA=true
 export PORT=80
 
+rvm use 2.3.3
 gem install bundler
 bundle install
 bundle exec rake db:migrate
