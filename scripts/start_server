@@ -1,9 +1,6 @@
 #!/bin/bash
+echo "start_server script run"
 cd /home/ec2-user/ruby-on-rails
-yum -y install postgresql-devel
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -L get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
 
 db_name=$(aws ssm get-parameters --region us-west-2 --names lelik9-db-name  --with-decryption --query Parameters[0].Value)
 db_name=`echo $db_name | sed -e 's/^"//' -e 's/"$//'`
@@ -28,8 +25,7 @@ export SECRET_KEY_BASE="$(bundle exec rake secret)"
 export DAEMONIZE_PUMA=true
 export PORT=80
 
-rvm requirements
-rvm install 2.3.3
-
-curl -sL https://rpm.nodesource.com/setup | bash -
-yum install -y nodejs
+gem install bundler
+bundle install
+bundle exec rake db:migrate
+bundle exec puma
