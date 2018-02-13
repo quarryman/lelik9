@@ -17,10 +17,10 @@ db_password=`echo $db_password | sed -e 's/^"//' -e 's/"$//'`
 db_host=$(aws ssm get-parameters --region us-west-2 --names lelik9-db-host  --with-decryption --query Parameters[0].Value)
 db_host=`echo $db_host | sed -e 's/^"//' -e 's/"$//'`
 
-export LUG_DATABASE=$db_name
-export LUG_DATABASE_USERNAME=$db_user
-export LUG_DATABASE_PASSWORD=$db_password
-export LUG_DB_HOST=$db_host
+export DATABASE=$db_name
+export DATABASE_USERNAME=$db_user
+export DATABASE_PASSWORD=$db_password
+export DATABASE_HOST=$db_host
 export RAILS_ENV=production
 export RAKE_ENV=production
 export DEVISE_SECRET=8db1b8d5158b97eb7b54bf002765323c04a5c1be86d34b44548637f6e7a358e160a078390957e5481b069761e8b8c1dcd0489cb0fa2ab302071d878634878161
@@ -29,6 +29,9 @@ export DAEMONIZE_PUMA=true
 
 rvm requirements
 rvm install 2.3.3
+
+curl -sL https://rpm.nodesource.com/setup | bash -
+yum install -y nodejs
 
 gem install bundler
 bundle install
